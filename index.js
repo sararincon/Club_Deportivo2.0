@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const fs = require("fs");
-const url = require("url");
 
 app.get("/", function (req, res) {
   res.setHeader("content-type", "text/html");
@@ -51,7 +50,7 @@ app.put("/editar", function (req, res) {
 });
 
 app.delete("/eliminar", function (req, res) {
-  const { nombre } = url.parse(req.url, true).query;
+  const { nombre } = req.query;
   let deportes = JSON.parse(fs.readFileSync("deportes.json", "utf-8"));
   let masDeportes = deportes.deportes;
   let index = masDeportes.findIndex((deporte) => {
